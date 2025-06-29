@@ -1,0 +1,19 @@
+from IPUMS USA, select the 1900 full count census, then add the following variables:
+
+STATEICP
+COUNTYICP
+METAREA
+ENUMDIST
+
+RELATE
+SEX
+AGE
+BIRTHMO
+BIRTHYR
+RACE
+BPL
+SPEAKENG
+LIT
+OCC1950
+
+and then download it! I also cut out HISTID to save space after downloading. :)

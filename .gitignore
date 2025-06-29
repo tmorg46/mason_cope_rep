@@ -1,6 +1,6 @@
 # exclude the raw data #
 ########################
-raw_data/
+raw_data/*.dta
 
 
 # OS generated files #
