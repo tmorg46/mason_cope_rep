@@ -17,7 +17,7 @@ global route "C:/Users/toom/Desktop/mason_cope_rep"
 ******************************************
 *pop the set open and get the FS stuff on!
 ******************************************
-/* done
+// done
 use "${route}/raw_data/ipums_extract.dta", clear
 
 rename (serial pernum) (serial1900 pernum1900)
@@ -32,21 +32,25 @@ merge m:1 serial1900 pernum1900 ///
 ************************************
 *create the markers for missing info
 ************************************
-/* done
-gen anymiss = ///
+// done
+recode birthyr (9999=.) // this is the IPUMS missing birthyr code
+
+gen byr_ip_miss = birthyr==.
+
+gen any_fs_miss = ///
 	pr_birth_month=="N/A" | ///
 	pr_birth_year==.      | ///
 	pr_age==.
 	
-gen monmiss = pr_birth_month=="N/A"
+gen mon_fs_miss = pr_birth_month=="N/A"
 
-gen byrmiss = pr_birth_year==.
+gen byr_fs_miss = pr_birth_year==.
 
-gen agemiss = pr_age==.
+gen age_fs_miss = pr_age==.
 
-// for some reason, the IPUMS vars are never missing,
+// for some reason, IPUMS age/month vars always there,
 // even though there are definitely people for whom
-// the manuscript has no value. If this weren't the
+// the manuscript has miss. value. If this weren't the
 // case, we wouldn't need to bring in the FS data.
 */
 
@@ -54,7 +58,7 @@ gen agemiss = pr_age==.
 *****************************************************
 *create the markers for within-person inconsistencies
 *****************************************************
-/* done
+// done
 *we can do this one for both IPUMS & FS:
 
 gen fs_imp_byr = 1900 - pr_age
